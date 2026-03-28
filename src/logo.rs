@@ -10,7 +10,7 @@ impl Train for Logo {
     }
 
     fn wheelset(&self, x: usize) -> &'static [&'static str] {
-        &LWHL[(x % 6)]
+        &LWHL[x % 6 ]
     }
 
     fn tender(&self) -> Option<&'static [&'static str]> {

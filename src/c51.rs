@@ -14,7 +14,7 @@ impl Train for C51 {
     }
 
     fn wheelset(&self, x: usize) -> &'static [&'static str] {
-        &C51WHL[(x % 6)]
+        &C51WHL[x % 6 ]
     }
 
     fn tender(&self) -> Option<&'static [&'static str]> {

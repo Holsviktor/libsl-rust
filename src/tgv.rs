@@ -15,7 +15,7 @@ impl Train for TGV {
     }
 
     fn wheelset(&self, x: usize) -> &'static [&'static str] {
-        &TGVWHL[(x % 2)]
+        &TGVWHL[x % 2 ]
     }
 
     fn wagons(&self) -> u32 {
