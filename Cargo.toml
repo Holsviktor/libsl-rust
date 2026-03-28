@@ -6,12 +6,7 @@ authors = [ "florian.gilcher@asquera.de" ]
 
 repository = "https://github.com/skade/rust-sl"
 
-[[bin]]
-
-name = "sl"
-
 [lib]
-
 name = "sl"
 path = "src/sl.rs"
 

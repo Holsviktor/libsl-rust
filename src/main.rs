@@ -1,36 +1,16 @@
+extern crate sl;
 extern crate libc;
 extern crate ncurses;
 extern crate getopts;
 
 use getopts::Options;
+use std::env;
 
-use crate::d51::SL;
-use crate::c51::C51;
-use crate::logo::Logo;
-use crate::tgv::TGV;
-pub mod d51;
-pub mod c51;
-pub mod logo;
-pub mod tgv;
-mod data;
-
-pub trait Train {
-    /// Approximate speed in km/h
-    fn speed(&self) -> u32 {
-        100
-    }
-    fn body(&self) -> &'static [&'static str];
-    fn wheelset(&self, x: usize) -> &'static [&'static str];
-    fn tender(&self) -> Option<&'static [&'static str]> {
-        None
-    }
-    fn wagons(&self) -> u32 {
-        0
-    }
-    fn wagon(&self) -> Option<&'static [&'static str]> {
-        None
-    }
-}
+use sl::Train;
+use sl::d51::SL;
+use sl::c51::C51;
+use sl::logo::Logo;
+use sl::tgv::TGV;
 
 fn speed2delay(speed: u32) -> u32 {
     // if 4_000_000: 100 km/h -> 40 ms
@@ -100,11 +80,13 @@ impl Render for C51 {}
 impl Render for Logo {}
 impl Render for TGV {}
 
-pub fn sl(args : &[String]) {
+fn main() {
     use libc::signal;
     use libc::usleep;
     use libc::SIGINT;
     use libc::SIG_IGN;
+
+    let args: Vec<String> = env::args().collect();
 
     let mut opts = Options::new();
     opts.optflag("l", "", "logo");
