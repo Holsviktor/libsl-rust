@@ -4,7 +4,6 @@ extern crate ncurses;
 extern crate getopts;
 
 use getopts::Options;
-use std::env;
 
 use sl::Train;
 use sl::d51::SL;
@@ -80,13 +79,11 @@ impl Render for C51 {}
 impl Render for Logo {}
 impl Render for TGV {}
 
-fn main() {
+pub fn sl(args : &[String]) {
     use libc::signal;
     use libc::usleep;
     use libc::SIGINT;
     use libc::SIG_IGN;
-
-    let args: Vec<String> = env::args().collect();
 
     let mut opts = Options::new();
     opts.optflag("l", "", "logo");
