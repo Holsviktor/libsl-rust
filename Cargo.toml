@@ -1,10 +1,10 @@
 [package]
 
-name = "sl"
+name = "libsl-rust"
 version = "0.1.0"
-authors = [ "florian.gilcher@asquera.de" ]
+authors = [ "florian.gilcher@asquera.de", "engineer@holsvik.party" ]
 
-repository = "https://github.com/skade/rust-sl"
+repository = "https://github.com/Holsviktor/libsl-rust.git"
 
 [lib]
 name = "sl"
