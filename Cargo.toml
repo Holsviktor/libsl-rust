@@ -3,14 +3,20 @@
 name = "libsl_rust"
 version = "0.1.0"
 authors = [ "florian.gilcher@asquera.de", "engineer@holsvik.party" ]
+edition = "2024"
 
 repository = "https://github.com/Holsviktor/libsl-rust.git"
+
+[[bin]]
+name = "sl_bin"
+path = "src/main.rs"
 
 [lib]
 name = "sl"
 path = "src/sl.rs"
 
 [dependencies]
+crossterm = "0.29.0"
 
 getopts = "0.2"
 libc = "0.2"

@@ -14,31 +14,6 @@ pub mod logo;
 pub mod tgv;
 mod data;
 
-use crossterm::terminal::{enable_raw_mode, disable_raw_mode};
-
-pub trait Train {
-    /// Approximate speed in km/h
-    fn speed(&self) -> u32 {
-        100
-    }
-    fn body(&self) -> &'static [&'static str];
-    fn wheelset(&self, x: usize) -> &'static [&'static str];
-    fn tender(&self) -> Option<&'static [&'static str]> {
-        None
-    }
-    fn wagons(&self) -> u32 {
-        0
-    }
-    fn wagon(&self) -> Option<&'static [&'static str]> {
-        None
-    }
-}
-
-fn speed2delay(speed: u32) -> u32 {
-    // if 4_000_000: 100 km/h -> 40 ms
-    4_000_000/speed
-}
-
 trait Render: Train {
     fn render(&self, x: i32) {
         let mut len = 0 as i32;
@@ -131,8 +106,6 @@ pub fn sl(args : &[String]) {
     ncurses::leaveok(ncurses::stdscr(), true);
     ncurses::scrollok(ncurses::stdscr(), false);
 
-    let _ = enable_raw_mode();
-
     let train: Box<dyn Train> = {
         if matches.opt_present("l") {
             Box::new(Logo)
@@ -162,7 +135,5 @@ pub fn sl(args : &[String]) {
             usleep(speed2delay(train.speed()));
         }
     }
-
-    let _ = disable_raw_mode();
     ncurses::endwin();
 }
